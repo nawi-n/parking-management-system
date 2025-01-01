@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: parking-management-system
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate --noinput
+    startCommand: gunicorn eagle.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: DJANGO_SETTINGS_MODULE
+        value: eagle.settings
+      - key: PYTHONPATH
+        value: /opt/render/project/src
