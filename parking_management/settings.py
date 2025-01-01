@@ -2,7 +2,8 @@
 
 ALLOWED_HOSTS = [
     'parking-management-system-sui2.onrender.com',
-    # Add any other hosts you need
+    'localhost',
+    '127.0.0.1',
 ]
 
 # ...existing code...
