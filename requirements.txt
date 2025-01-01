@@ -1,3 +1,4 @@
 django
 django-widget-tweaks
 xhtml2pdf
+gunicorn
