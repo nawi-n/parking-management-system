@@ -16,16 +16,15 @@ STATIC_DIR=os.path.join(BASE_DIR,'static')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sotgn(5f3nd(d=a_5w#((x(u!kio!4!%yh-&&i&w%m@4--t###'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'sotgn(5f3nd(d=a_5w#((x(u!kio!4!%yh-&&i&w%m@4--t###')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = [
     'parking-management-system-sui2.onrender.com',
     'localhost',
     '127.0.0.1',
-    '*',  # Temporarily add this for testing, remove in production
 ]
 
 
@@ -86,6 +85,11 @@ DATABASES = {
     }
 }
 
+if 'RENDER' in os.environ:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -149,3 +153,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #LOGIN_URL = 'home'
 #LOGIN_REDIRECT_URL = 'home'
+
+# Security settings for production
+SECURE_SSL_REDIRECT = 'RENDER' in os.environ
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = 'RENDER' in os.environ
+CSRF_COOKIE_SECURE = 'RENDER' in os.environ
+
+# Static files configuration
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+# Login settings
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
