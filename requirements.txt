@@ -1,4 +1,4 @@
-django
-django-widget-tweaks
-xhtml2pdf
-gunicorn
+django==5.1.4
+django-widget-tweaks==1.5.0
+xhtml2pdf==0.2.16
+gunicorn==23.0.0

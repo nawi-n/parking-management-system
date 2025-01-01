@@ -21,7 +21,12 @@ SECRET_KEY = 'sotgn(5f3nd(d=a_5w#((x(u!kio!4!%yh-&&i&w%m@4--t###'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'parking-management-system-sui2.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    '*',  # Temporarily add this for testing, remove in production
+]
 
 
 # Application definition
